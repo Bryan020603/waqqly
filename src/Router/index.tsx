@@ -33,6 +33,7 @@ export const RootRouter = () => {
   if (isAuthenticating) {
     return <FullPageCircularSpinner />;
   }
+  console.log('addd');
   return (
     <Router>
       <Routes>
@@ -57,6 +58,7 @@ export const RootRouter = () => {
             ))}
           </Route>
         </Route>
+        <Route path="*" element={<div>Path does not exist</div>} />
       </Routes>
     </Router>
   );
