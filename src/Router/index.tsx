@@ -6,8 +6,8 @@ import { withLoading } from '@/shared/hocs/WithLoading';
 import { useLoadUserSession } from '@/shared/hooks/useLoadUserSession';
 import { lazy } from 'react';
 import {
-  BrowserRouter as Router,
-  Routes,
+  BrowserRouter,
+  Routes as Router,
   Route,
   Navigate,
 } from 'react-router-dom';
@@ -20,46 +20,46 @@ const SignUp = withLoading(SignUpPage);
 const SignIn = withLoading(SignInPage);
 const Dashboard = withLoading(DashboardPage);
 
-const publicRoutes = [
-  { path: '/sign-up', Component: SignUp },
-  { path: '/sign-in', Component: SignIn },
-];
-
-const privateRoutes = [{ path: '/dashboard', Component: Dashboard }];
-
 export const RootRouter = () => {
   const { isAuthenticating } = useLoadUserSession();
 
   if (isAuthenticating) {
     return <FullPageCircularSpinner />;
   }
-  console.log('addd');
   return (
-    <Router>
-      <Routes>
+    <BrowserRouter>
+      <Router>
         <Route index element={<Navigate to="/sign-in" />} />
-        <Route element={<AuthRedirect />}>
-          {publicRoutes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={<route.Component />}
-            />
-          ))}
-        </Route>
-        <Route element={<RequireAuth />}>
-          <Route element={<AppLayout />}>
-            {privateRoutes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                element={<route.Component />}
-              />
-            ))}
-          </Route>
-        </Route>
+        <Route
+          path="/sign-in"
+          element={
+            <AuthRedirect>
+              <SignIn />
+            </AuthRedirect>
+          }
+        />
+        <Route
+          path="/sign-up"
+          element={
+            <AuthRedirect>
+              <SignUp />
+            </AuthRedirect>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <Dashboard />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
         <Route path="*" element={<div>Path does not exist</div>} />
-      </Routes>
-    </Router>
+      </Router>
+    </BrowserRouter>
   );
 };

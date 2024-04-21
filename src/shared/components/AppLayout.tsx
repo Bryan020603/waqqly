@@ -1,6 +1,6 @@
 import { Box, BoxProps, styled } from '@mui/material';
-import { Outlet } from 'react-router-dom';
 import { Navigation } from './Navigation';
+import React from 'react';
 
 const AppLayoutWrapper = styled(Box)<BoxProps>(() => ({
   width: '100%',
@@ -12,11 +12,11 @@ const AppLayoutWrapper = styled(Box)<BoxProps>(() => ({
   },
 }));
 
-export const AppLayout = () => {
+export const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <AppLayoutWrapper>
       <Navigation />
-      <Outlet />
+      {children}
     </AppLayoutWrapper>
   );
 };
