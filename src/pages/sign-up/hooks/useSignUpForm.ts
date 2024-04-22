@@ -56,7 +56,7 @@ export const useSignUpForm = () => {
       username: '',
       email: '',
       password: '',
-      userType: UserTypes.PETS_OWNER,
+      userType: UserTypes.PET_OWNER,
     },
   });
   const { setCurrentStep, setEmail } = useAuthStep();

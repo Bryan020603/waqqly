@@ -76,8 +76,8 @@ export const SignupForm = () => {
                 helperText={error?.message}
                 {...field}
               >
-                <MenuItem value={UserTypes.PETS_OWNER}>Pets Owner</MenuItem>
-                <MenuItem value={UserTypes.WALKERS}>Walkers</MenuItem>
+                <MenuItem value={UserTypes.PET_OWNER}>Pet Owner</MenuItem>
+                <MenuItem value={UserTypes.PET_WALKER}>Pet Walker</MenuItem>
               </TextField>
             )}
           />
