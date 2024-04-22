@@ -4,12 +4,14 @@ import {
   Button,
   Card,
   CircularProgress,
+  MenuItem,
   TextField,
   Typography,
 } from '@mui/material';
 import { useSignUpForm } from '../hooks/useSignUpForm';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { UserTypes } from '@/shared/enums/user-types.enum';
 export const SignupForm = () => {
   const { control, isSubmitting, onSubmit, error, resetError } =
     useSignUpForm();
@@ -61,6 +63,25 @@ export const SignupForm = () => {
               />
             )}
           />
+
+          <Controller
+            control={control}
+            name="userType"
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                fullWidth
+                select
+                label="Account Type"
+                error={Boolean(error)}
+                helperText={error?.message}
+                {...field}
+              >
+                <MenuItem value={UserTypes.PETS_OWNER}>Pets Owner</MenuItem>
+                <MenuItem value={UserTypes.WALKERS}>Walkers</MenuItem>
+              </TextField>
+            )}
+          />
+
           <Controller
             control={control}
             name="password"

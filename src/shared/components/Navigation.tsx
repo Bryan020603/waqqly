@@ -1,25 +1,47 @@
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   useAuthActions,
   useAuthIsAuthenticatedSelector,
+  useAuthUserAttributesSelector,
   useAuthUserSelector,
 } from '@/shared/hooks/useAuthStore';
 import { signOut } from 'aws-amplify/auth';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { useState } from 'react';
 
 export const Navigation = () => {
   const navigate = useNavigate();
   const user = useAuthUserSelector();
   const isAuthenticated = useAuthIsAuthenticatedSelector();
-  const { setUser, setUserSession } = useAuthActions();
-
+  const userAttributes = useAuthUserAttributesSelector();
+  const { setUser, setUserSession, setUserAttributes } = useAuthActions();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isLoggedIn = Boolean(user) && isAuthenticated;
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleLogout = async () => {
     try {
       await signOut();
       setUser(undefined);
       setUserSession(undefined);
+      setUserAttributes(undefined);
+      handleClose();
       navigate('/sign-in');
     } catch (error) {
       console.log(error);
@@ -42,7 +64,7 @@ export const Navigation = () => {
             textDecoration: 'none',
           }}
         >
-          LOGO
+          Waqqly
         </Typography>
         {isLoggedIn && (
           <Box sx={{ flexGrow: 1 }}>
@@ -61,38 +83,52 @@ export const Navigation = () => {
               gap={2}
             >
               <Typography component="li">
-                <Link to="/#">Add Pets</Link>
+                <Link to="/add-pets">Add Pets</Link>
               </Typography>
               <Typography component="li">
-                <Link to="/#">Add Walkers</Link>
+                <Link to="/your-pets">Your Pets</Link>
               </Typography>
             </Box>
           </Box>
         )}
         <Box sx={{ marginLeft: 'auto' }}>
-          {isLoggedIn ? (
-            <Button onClick={handleLogout} color="inherit">
-              Logout
-            </Button>
-          ) : (
-            <>
-              <Button color="inherit">
-                <Link
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                  to="/login"
-                >
-                  Login
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                  to="/register"
-                >
-                  Register
-                </Link>
-              </Button>
-            </>
+          {isLoggedIn && (
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              gap={2}
+            >
+              <Typography>Hello, {userAttributes?.name}</Typography>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </Box>
           )}
         </Box>
       </Toolbar>

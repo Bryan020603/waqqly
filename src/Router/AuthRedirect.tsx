@@ -2,10 +2,12 @@ import React from 'react';
 import {
   useAuthIsAuthenticatedSelector,
   useAuthUserSelector,
-} from '../hooks/useAuthStore';
+} from '../shared/hooks/useAuthStore';
 import { Navigate } from 'react-router-dom';
-export const RequireAuth = ({ children }: { children: React.ReactNode }) => {
+
+export const AuthRedirect = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthIsAuthenticatedSelector();
   const user = useAuthUserSelector();
-  return isAuthenticated && user ? children : <Navigate to="/sign-in" />;
+  const isLoggedIn = isAuthenticated && user;
+  return !isLoggedIn ? children : <Navigate to="/dashboard" />;
 };

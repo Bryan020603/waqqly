@@ -1,17 +1,13 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "waqqly0f78b08c_identitypool_0f78b08c",
+    "identityPoolName": "waqqlyd2c51403_identitypool_d2c51403",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "waqqly0f78b08c",
-    "userPoolName": "waqqly0f78b08c_userpool_0f78b08c",
-    "autoVerifiedAttributes": [
-      "email"
-    ],
+    "resourceNameTruncated": "waqqlyd2c51403",
+    "userPoolName": "waqqlyd2c51403_userpool_d2c51403",
+    "autoVerifiedAttributes": ["email"],
     "mfaConfiguration": "OFF",
-    "mfaTypes": [
-      "SMS Text Message"
-    ],
+    "mfaTypes": ["SMS Text Message"],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
@@ -19,31 +15,20 @@
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
-    "requiredAttributes": [
-      "email",
-      "name"
-    ],
+    "requiredAttributes": ["email", "name"],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": "1",
-    "userpoolClientWriteAttributes": [
-      "email",
-      "name"
-    ],
-    "userpoolClientReadAttributes": [
-      "email",
-      "name"
-    ],
-    "userpoolClientLambdaRole": "waqqly0f78b08c_userpoolclient_lambda_role",
+    "userpoolClientWriteAttributes": ["email", "name", "custom:user_type"],
+    "userpoolClientReadAttributes": ["email", "name", "custom:user_type"],
+    "userpoolClientLambdaRole": "waqqlyd2c51403_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": true,
-    "sharedId": "0f78b08c",
-    "resourceName": "waqqly0f78b08c0f78b08c",
+    "sharedId": "d2c51403",
+    "resourceName": "waqqlyd2c51403d2c51403",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "manual",
     "thirdPartyAuth": false,
-    "usernameAttributes": [
-      "email"
-    ],
+    "usernameAttributes": ["email"],
     "userPoolGroups": false,
     "adminQueries": false,
     "triggers": {},

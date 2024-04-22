@@ -5,6 +5,7 @@ import { AuthSteps, useAuthStep } from './useAuthStep';
 import { useState } from 'react';
 import { formatErrorMessage } from '@/shared/utils';
 import { z } from 'zod';
+import { UserTypes } from '@/shared/enums/user-types.enum';
 
 const signupFormSchema = z
   .object({
@@ -19,7 +20,7 @@ const signupFormSchema = z
         required_error: 'Confirm Password is required',
       })
       .min(1, 'Confirm Password is required'),
-
+    userType: z.nativeEnum(UserTypes),
     email: z
       .string({
         required_error: 'email is required',
@@ -55,6 +56,7 @@ export const useSignUpForm = () => {
       username: '',
       email: '',
       password: '',
+      userType: UserTypes.PETS_OWNER,
     },
   });
   const { setCurrentStep, setEmail } = useAuthStep();
@@ -74,6 +76,7 @@ export const useSignUpForm = () => {
           userAttributes: {
             email: values.email,
             name: values.username,
+            'custom:user_type': values.userType,
           },
           autoSignIn: {
             authFlowType: 'USER_SRP_AUTH',

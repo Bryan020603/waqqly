@@ -9,11 +9,25 @@
       "UnauthRoleName": "amplify-waqqly-dev-6e595-unauthRole",
       "StackName": "amplify-waqqly-dev-6e595",
       "StackId": "arn:aws:cloudformation:eu-west-1:975050215988:stack/amplify-waqqly-dev-6e595/2b6514b0-fff1-11ee-914c-0297a7c0b3a5",
-      "AmplifyAppId": "d39y2fo1jt7y7z"
+      "AmplifyAppId": "d39y2fo1jt7y7z",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-waqqly-dev-6e595-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
-        "waqqly0f78b08c0f78b08c": {}
+        "waqqlyd2c51403d2c51403": {}
+      },
+      "storage": {
+        "s350727566": {}
+      },
+      "function": {
+        "petsController": {
+          "deploymentBucketName": "amplify-waqqly-dev-6e595-deployment",
+          "s3Key": "amplify-builds/petsController-566e5a75485046714158-build.zip",
+          "mongodbUri": "mongodb+srv://beugrebryan:Bryan2003@cluster0.pvhi7n1.mongodb.net/waqqly?retryWrites=true&w=majority&appName=Cluster0"
+        }
+      },
+      "api": {
+        "api1762f854": {}
       }
     }
   }

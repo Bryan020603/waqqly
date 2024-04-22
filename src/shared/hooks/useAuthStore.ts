@@ -1,4 +1,8 @@
-import { AuthUser, AuthSession } from 'aws-amplify/auth';
+import {
+  AuthUser,
+  AuthSession,
+  FetchUserAttributesOutput,
+} from 'aws-amplify/auth';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import _pick from 'lodash/pick';
@@ -6,12 +10,16 @@ import _pick from 'lodash/pick';
 type AuthState = {
   isAuthenticating: boolean;
   isAuthenticated: boolean;
+  userAttributes: FetchUserAttributesOutput | undefined;
   userSession: AuthSession | undefined;
   user: AuthUser | undefined;
   error: string | undefined;
   setIsAuthenticating: (value: boolean) => void;
   setUser: (user: AuthUser | undefined) => void;
   setUserSession: (user: AuthSession | undefined) => void;
+  setUserAttributes: (
+    userAttributes: FetchUserAttributesOutput | undefined
+  ) => void;
   setError: (error: string | undefined) => void;
 };
 
@@ -20,6 +28,7 @@ const useAuthStore = create<AuthState>()(
     (set) => ({
       userSession: undefined,
       isAuthenticated: false,
+      userAttributes: undefined,
       error: undefined,
       user: undefined,
       isAuthenticating: true,
@@ -32,6 +41,11 @@ const useAuthStore = create<AuthState>()(
       setUserSession: (userSession) => {
         set({
           userSession,
+        });
+      },
+      setUserAttributes: (userAttributes) => {
+        set({
+          userAttributes,
         });
       },
       setError: (error) => {
@@ -56,6 +70,7 @@ const useAuthStore = create<AuthState>()(
 // Selectors
 const userSelector = (state: AuthState) => state.user;
 const userSessionSelector = (state: AuthState) => state.userSession;
+const userAttributesSelector = (state: AuthState) => state.userAttributes;
 const isAuthenticatingSelector = (state: AuthState) => state.isAuthenticating;
 const isAuthenticatedSelector = (state: AuthState) => state.isAuthenticated;
 const errorSelector = (state: AuthState) => state.error;
@@ -65,12 +80,15 @@ const authActionsSelector = (state: AuthState) =>
     'setUser',
     'setIsAuthenticating',
     'setUserSession',
+    'setUserAttributes',
   ]);
 
 // hooks
 export const useAuthUserSelector = () => useAuthStore(userSelector);
 export const useAuthUserSessionSelector = () =>
   useAuthStore(userSessionSelector);
+export const useAuthUserAttributesSelector = () =>
+  useAuthStore(userAttributesSelector);
 export const useAuthIsAuthenticatingSelector = () =>
   useAuthStore(isAuthenticatingSelector);
 export const useAuthIsAuthenticatedSelector = () =>
