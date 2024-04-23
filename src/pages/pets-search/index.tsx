@@ -104,6 +104,23 @@ const PetsSearch = () => {
                         {pet.color}
                       </Typography>
                     </Box>
+
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Typography
+                        component="span"
+                        fontWeight="500"
+                        variant="body2"
+                      >
+                        Location:
+                      </Typography>
+                      <Typography
+                        component="span"
+                        fontWeight="400"
+                        variant="body2"
+                      >
+                        {pet.petLocation}
+                      </Typography>
+                    </Box>
                     <Box display="flex" alignItems="center" gap={1}>
                       <Typography
                         component="span"
