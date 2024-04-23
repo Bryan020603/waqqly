@@ -1,32 +1,40 @@
 import { MainContent } from '@/shared/components/MainContent';
 import {
+  Avatar,
   Backdrop,
   Box,
   Button,
   CircularProgress,
   Container,
   Grid,
-  InputAdornment,
   MenuItem,
   TextField,
   Typography,
 } from '@mui/material';
-import { useAddPetsForm } from './hooks/useAddPetsForm';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { useChangeWalkerProfile } from './hooks/useChangeWalkerProfile';
 import { Controller } from 'react-hook-form';
-import { PetSizes } from '@/shared/enums/pet-sizes.enum';
 import ukStates from '@/data/uk-states.json';
-import { MuiFileInput } from 'mui-file-input';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
+import { MuiTelInput } from 'mui-tel-input';
+import { FullPageCircularSpinner } from '@/shared/components/FullPageCircularSpinner';
 
-const AddPets = () => {
+const WalkerProfile = () => {
   const {
     control,
+    avatarUrl,
+    handleUploadImage,
+    isImageUploading,
     isSubmitting,
     onSubmit,
-    file,
-    handleUploadPetImage,
-    isImageUploading,
-  } = useAddPetsForm();
+    handleTelInputChange,
+    tel,
+    isLoading,
+    isDirty,
+  } = useChangeWalkerProfile();
+
+  if (isLoading) {
+    return <FullPageCircularSpinner />;
+  }
 
   return (
     <MainContent>
@@ -38,20 +46,55 @@ const AddPets = () => {
       </Backdrop>
       <Container fixed>
         <Typography variant="h4" my={5}>
-          Add a new Pet
+          Change Profile
         </Typography>
         <form onSubmit={onSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} mb={7}>
+            <Grid item xs={12}>
+              <label htmlFor="avatar">
+                <Box
+                  position="relative"
+                  maxWidth="min-content"
+                  sx={{ cursor: 'pointer' }}
+                >
+                  <input
+                    type="file"
+                    id="avatar"
+                    hidden
+                    multiple={false}
+                    accept="image/*"
+                    onChange={handleUploadImage}
+                  />
+                  <Avatar
+                    src={avatarUrl}
+                    sx={{
+                      objectFit: 'cover',
+                      width: '120px',
+                      height: '120px',
+                    }}
+                  />
+                  <AddAPhotoIcon
+                    color="secondary"
+                    sx={{
+                      position: 'absolute',
+                      bottom: '13px',
+                      right: '8px',
+                    }}
+                  />
+                </Box>
+              </label>
+            </Grid>
+
             <Grid item xs={12} sm={6}>
               <Controller
                 control={control}
-                name="name"
+                name="firstName"
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Pet Name"
+                    label="First Name"
                     type="text"
-                    placeholder="Enter your Pet name"
+                    placeholder="Enter your first name"
                     error={Boolean(error)}
                     helperText={error?.message}
                     {...field}
@@ -63,13 +106,13 @@ const AddPets = () => {
             <Grid item xs={12} sm={6}>
               <Controller
                 control={control}
-                name="color"
+                name="lastName"
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Pet Color"
+                    label="Last Name"
                     type="text"
-                    placeholder="Enter your Pet color"
+                    placeholder="Enter your last name"
                     error={Boolean(error)}
                     helperText={error?.message}
                     {...field}
@@ -81,23 +124,17 @@ const AddPets = () => {
             <Grid item xs={12} sm={6}>
               <Controller
                 control={control}
-                name="size"
+                name="numOfExperience"
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    select
-                    label="Pet Size"
-                    placeholder="Select your Pet size"
+                    label="Experience"
+                    type="number"
+                    placeholder="Enter your experience"
                     error={Boolean(error)}
                     helperText={error?.message}
                     {...field}
-                  >
-                    <MenuItem value={PetSizes.SMALL}>Small</MenuItem>
-                    <MenuItem value={PetSizes.MEDIUM}>Medium</MenuItem>
-                    <MenuItem value={PetSizes.LARGE}>Large</MenuItem>
-                    <MenuItem value={PetSizes.XSMALL}>Extra Small</MenuItem>
-                    <MenuItem value={PetSizes.XLARGE}>Extra Large</MenuItem>
-                  </TextField>
+                  />
                 )}
               />
             </Grid>
@@ -105,13 +142,31 @@ const AddPets = () => {
             <Grid item xs={12} sm={6}>
               <Controller
                 control={control}
-                name="petLocation"
+                name="age"
+                render={({ field, fieldState: { error } }) => (
+                  <TextField
+                    fullWidth
+                    label="Age"
+                    type="number"
+                    placeholder="Enter your age"
+                    error={Boolean(error)}
+                    helperText={error?.message}
+                    {...field}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                control={control}
+                name="location"
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
                     select
-                    label="Pet Location"
-                    placeholder="Select your pet location"
+                    label="Location"
+                    placeholder="Select your location"
                     error={Boolean(error)}
                     SelectProps={{
                       MenuProps: {
@@ -135,48 +190,14 @@ const AddPets = () => {
             <Grid item xs={12} sm={6}>
               <Controller
                 control={control}
-                name="ownerFirstName"
+                name="email"
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Owner First Name"
-                    type="text"
-                    placeholder="Enter owner first name"
-                    error={Boolean(error)}
-                    helperText={error?.message}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                control={control}
-                name="ownerLastName"
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    fullWidth
-                    label="Owner Last Name"
-                    type="text"
-                    placeholder="Enter owner last name"
-                    error={Boolean(error)}
-                    helperText={error?.message}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Controller
-                control={control}
-                name="ownerEmail"
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    fullWidth
-                    label="Owner Email"
+                    label="Email"
                     type="email"
-                    placeholder="Enter owner email"
+                    disabled
+                    placeholder="Enter your email"
                     error={Boolean(error)}
                     helperText={error?.message}
                     {...field}
@@ -185,37 +206,48 @@ const AddPets = () => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <MuiFileInput
-                multiple={false}
-                inputProps={{ accept: '.png, .jpeg, .jpg' }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <AttachFileIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                fullWidth
-                placeholder="Upload pet image"
-                value={file}
-                onChange={handleUploadPetImage}
+              <Controller
+                control={control}
+                name="bio"
+                render={({ field, fieldState: { error } }) => (
+                  <TextField
+                    fullWidth
+                    label="Bio"
+                    type="text"
+                    multiline
+                    minRows={5}
+                    placeholder="Enter your bio"
+                    error={Boolean(error)}
+                    helperText={error?.message}
+                    {...field}
+                  />
+                )}
               />
             </Grid>
 
-            <Grid item xs={12} display="flex" justifyContent="flex-end">
+            <Grid item xs={12} sm={6}>
+              <MuiTelInput
+                fullWidth
+                onlyCountries={['GB']}
+                defaultCountry="GB"
+                value={tel}
+                onChange={handleTelInputChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
               <Button
-                disabled={isSubmitting}
-                type="submit"
+                disabled={isSubmitting || !isDirty}
                 variant="contained"
-                size="large"
+                type="submit"
               >
                 {isSubmitting ? (
                   <Box display="flex" alignItems="center" gap={2}>
                     <CircularProgress size={23} color="inherit" />
-                    <Typography variant="body1">Submitting</Typography>
+                    <Typography variant="body1">Saving</Typography>
                   </Box>
                 ) : (
-                  'Submit'
+                  ' Save Changes'
                 )}
               </Button>
             </Grid>
@@ -226,4 +258,4 @@ const AddPets = () => {
   );
 };
 
-export default AddPets;
+export default WalkerProfile;

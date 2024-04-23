@@ -17,6 +17,8 @@ import {
 import { signOut } from 'aws-amplify/auth';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useState } from 'react';
+import { PetOwnerNaviItems } from './PetOwnerNavItems';
+import { PetWalkerNaviItems } from './PetWalkerNavItems';
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -82,12 +84,8 @@ export const Navigation = () => {
               }}
               gap={2}
             >
-              <Typography component="li">
-                <Link to="/add-pets">Add Pets</Link>
-              </Typography>
-              <Typography component="li">
-                <Link to="/your-pets">Your Pets</Link>
-              </Typography>
+              <PetOwnerNaviItems />
+              <PetWalkerNaviItems />
             </Box>
           </Box>
         )}
@@ -125,7 +123,6 @@ export const Navigation = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </Box>

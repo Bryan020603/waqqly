@@ -22,8 +22,13 @@
       "function": {
         "petsController": {
           "deploymentBucketName": "amplify-waqqly-dev-6e595-deployment",
-          "s3Key": "amplify-builds/petsController-566e5a75485046714158-build.zip",
+          "s3Key": "amplify-builds/petsController-6a524f614b7773567354-build.zip",
           "mongodbUri": "mongodb+srv://beugrebryan:Bryan2003@cluster0.pvhi7n1.mongodb.net/waqqly?retryWrites=true&w=majority&appName=Cluster0"
+        },
+        "walkerController": {
+          "mongodbUri": "mongodb+srv://beugrebryan:Bryan2003@cluster0.pvhi7n1.mongodb.net/waqqly?retryWrites=true&w=majority&appName=Cluster0",
+          "deploymentBucketName": "amplify-waqqly-dev-6e595-deployment",
+          "s3Key": "amplify-builds/walkerController-624c63676f474a634e77-build.zip"
         }
       },
       "api": {

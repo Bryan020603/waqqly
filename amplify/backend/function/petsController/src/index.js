@@ -5,6 +5,8 @@ import httpRouterHandler from '@middy/http-router';
 import cors from '@middy/http-cors';
 import { handleCreatePet } from './functions/handleCreatePet.js';
 import { handleGetUserPets } from './functions/handleGetUserPets.js';
+import { handleSearchPets } from './functions/handleSearchPets.js';
+import { handleDeletePet } from './functions/handleDeletePet.js';
 
 const routes = [
   {
@@ -16,6 +18,16 @@ const routes = [
     method: 'GET',
     path: '/pets',
     handler: handleGetUserPets,
+  },
+  {
+    method: 'GET',
+    path: '/pets/{id}',
+    handler: handleDeletePet,
+  },
+  {
+    method: 'GET',
+    path: '/pets/search',
+    handler: handleSearchPets,
   },
 ];
 

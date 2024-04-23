@@ -16,12 +16,18 @@ const SignInPage = lazy(() => import('@/pages/sign-in'));
 const DashboardPage = lazy(() => import('@/pages/dashboard'));
 const AddPetsPage = lazy(() => import('@/pages/add-pets'));
 const PetsPage = lazy(() => import('@/pages/pets'));
+const WalkerProfilePage = lazy(() => import('@/pages/walker-profile'));
+const PetsSearchPage = lazy(() => import('@/pages/pets-search'));
+const SearchPetWalkersPage = lazy(() => import('@/pages/search-pet-walkers'));
 
 const SignUp = withLoading(SignUpPage);
 const SignIn = withLoading(SignInPage);
 const Dashboard = withLoading(DashboardPage);
 const AddPets = withLoading(AddPetsPage);
 const Pets = withLoading(PetsPage);
+const WalkerProfile = withLoading(WalkerProfilePage);
+const PetsSearch = withLoading(PetsSearchPage);
+const SearchPetWalkers = withLoading(SearchPetWalkersPage);
 
 export const RootRouter = () => {
   const { isAuthenticating } = useLoadUserSession();
@@ -59,6 +65,18 @@ export const RootRouter = () => {
           element={<PrivateRoute Component={AddPets} />}
         />
         <Route path="/your-pets" element={<PrivateRoute Component={Pets} />} />
+        <Route
+          path="/walker-profile"
+          element={<PrivateRoute Component={WalkerProfile} />}
+        />
+        <Route
+          path="/search-pets"
+          element={<PrivateRoute Component={PetsSearch} />}
+        />
+        <Route
+          path="/search-pet-walkers"
+          element={<PrivateRoute Component={SearchPetWalkers} />}
+        />
 
         <Route path="*" element={<div>Path does not exist</div>} />
       </Router>

@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { get, post } from 'aws-amplify/api';
 import { Amplify } from 'aws-amplify';
 
 const RestConfig = Amplify.getConfig().API!.REST!;
 const ApiName = Object.keys(RestConfig)[0];
 
-export const createPet = async (payload: Record<string, any>) => {
+export const handleChangeWalkerProfile = async (
+  payload: Record<string, any>
+) => {
   const postOperation = post({
     apiName: ApiName,
-    path: '/pets',
+    path: '/walker/profile',
     options: {
       body: payload,
     },
@@ -18,22 +21,19 @@ export const createPet = async (payload: Record<string, any>) => {
   return response;
 };
 
-export const getUserPets = async () => {
+export const getWalkerProfile = async () => {
   const getOperation = get({
     apiName: ApiName,
-    path: '/pets',
+    path: '/walker/profile',
   });
   const { body } = await getOperation.response;
   const response = await body.json();
   return response;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getPets = async (params: Record<string, any>) => {
-  console.log(params);
+export const getWalkers = async (params: Record<string, string>) => {
   const getOperation = get({
     apiName: ApiName,
-    path: '/pets/search',
+    path: '/walker/search',
     options: {
       queryParams: params,
     },

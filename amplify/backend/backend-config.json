@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "petsController"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "walkerController"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -49,6 +57,12 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "walkerController": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -73,6 +87,30 @@
         {
           "category": "function",
           "resourceName": "petsController"
+        }
+      ]
+    },
+    "AMPLIFY_function_walkerController_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "walkerController"
+        }
+      ]
+    },
+    "AMPLIFY_function_walkerController_mongodbUri": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "walkerController"
+        }
+      ]
+    },
+    "AMPLIFY_function_walkerController_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "walkerController"
         }
       ]
     }
