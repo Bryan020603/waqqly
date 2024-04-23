@@ -20,8 +20,13 @@ export const useFetchUserPets = () => {
       });
   }, []);
 
+  const onPetRemoved = (id: string) => {
+    setPets((prev) => prev.filter((p) => p._id !== id));
+  };
+
   return {
     isLoading,
     pets,
+    onPetRemoved,
   };
 };

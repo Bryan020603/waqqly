@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { get, post } from 'aws-amplify/api';
+import { get, post, del } from 'aws-amplify/api';
 import { Amplify } from 'aws-amplify';
 
 const RestConfig = Amplify.getConfig().API!.REST!;
@@ -30,7 +30,6 @@ export const getUserPets = async () => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getPets = async (params: Record<string, any>) => {
-  console.log(params);
   const getOperation = get({
     apiName: ApiName,
     path: '/pets/search',
@@ -40,5 +39,14 @@ export const getPets = async (params: Record<string, any>) => {
   });
   const { body } = await getOperation.response;
   const response = await body.json();
+  return response;
+};
+
+export const deletePet = async (id: string) => {
+  const deleteOperation = del({
+    apiName: ApiName,
+    path: `/pets/${id}`,
+  });
+  const response = await deleteOperation.response;
   return response;
 };

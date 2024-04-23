@@ -41,7 +41,7 @@ const SearchPetWalkers = () => {
             item
             xs={12}
             display="flex"
-            justifyContent="flex-start"
+            justifyContent="flex-end"
             alignItems="center"
             gap={2}
           >
@@ -58,7 +58,7 @@ const SearchPetWalkers = () => {
           </Grid>
         </Grid>
 
-        <Grid container mb={7}>
+        <Grid container mb={7} spacing={2}>
           {walkers.map((walker) => (
             <Grid key={walker._id} item xs={12} sm={6} md={4} lg={3}>
               <Card
@@ -125,6 +125,26 @@ const SearchPetWalkers = () => {
                       variant="body2"
                     >
                       {walker.numOfExperience}
+                    </Typography>
+                  </Box>
+
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <Typography
+                      component="span"
+                      fontWeight="600"
+                      variant="body2"
+                      sx={{
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Location:
+                    </Typography>
+                    <Typography
+                      component="span"
+                      fontWeight="400"
+                      variant="body2"
+                    >
+                      {walker.location}
                     </Typography>
                   </Box>
 

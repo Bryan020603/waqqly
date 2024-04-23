@@ -20,7 +20,7 @@ const routes = [
     handler: handleGetUserPets,
   },
   {
-    method: 'GET',
+    method: 'DELETE',
     path: '/pets/{id}',
     handler: handleDeletePet,
   },

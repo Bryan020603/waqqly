@@ -94,7 +94,7 @@ const PetsSearch = () => {
                         fontWeight="500"
                         variant="body2"
                       >
-                        Color:
+                        Colour:
                       </Typography>
                       <Typography
                         component="span"

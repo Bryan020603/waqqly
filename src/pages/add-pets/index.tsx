@@ -67,9 +67,9 @@ const AddPets = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Pet Color"
+                    label="Pet Colour"
                     type="text"
-                    placeholder="Enter your Pet color"
+                    placeholder="Enter your Pet colour"
                     error={Boolean(error)}
                     helperText={error?.message}
                     {...field}
@@ -139,7 +139,7 @@ const AddPets = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Owner First Name"
+                    label="Owner's First Name"
                     type="text"
                     placeholder="Enter owner first name"
                     error={Boolean(error)}
@@ -156,7 +156,7 @@ const AddPets = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Owner Last Name"
+                    label="Owner's Last Name"
                     type="text"
                     placeholder="Enter owner last name"
                     error={Boolean(error)}
@@ -174,7 +174,7 @@ const AddPets = () => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     fullWidth
-                    label="Owner Email"
+                    label="Owner's Email"
                     type="email"
                     placeholder="Enter owner email"
                     error={Boolean(error)}

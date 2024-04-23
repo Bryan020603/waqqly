@@ -14,7 +14,7 @@ export const WalkersSearchFilters = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={4}>
         <TextField
           onChange={handleOnChange}
           name="age"
@@ -25,7 +25,7 @@ export const WalkersSearchFilters = () => {
           label="Age"
         />
       </Grid>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={4}>
         <TextField
           onChange={handleOnChange}
           fullWidth
@@ -37,7 +37,7 @@ export const WalkersSearchFilters = () => {
         />
       </Grid>
 
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={12} sm={4}>
         <TextField
           fullWidth
           select

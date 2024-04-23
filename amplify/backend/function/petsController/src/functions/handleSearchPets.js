@@ -23,7 +23,7 @@ const handler = async (event) => {
       query.size = queryParams.size;
     }
     if (queryParams.location) {
-      query.petLocation = queryParams.petLocation;
+      query.petLocation = queryParams.location;
     }
 
     await dataSource.connect();

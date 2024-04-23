@@ -5,6 +5,7 @@ import {
   Box,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   Container,
@@ -12,9 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { PetRemoveBtn } from './components/PetRemoveBtn';
 
 const Pets = () => {
-  const { isLoading, pets } = useFetchUserPets();
+  const { isLoading, pets, onPetRemoved } = useFetchUserPets();
 
   if (isLoading) {
     return <FullPageCircularSpinner />;
@@ -45,7 +47,7 @@ const Pets = () => {
         </Typography>
         <Grid container spacing={3} mb={7}>
           {pets.map((pet) => (
-            <Grid key={pet._id} item xs={12} sm={4} md={3}>
+            <Grid key={pet._id} item xs={12} sm={6} md={4} lg={3}>
               <Card>
                 <CardActionArea>
                   <CardMedia
@@ -79,7 +81,7 @@ const Pets = () => {
                         fontWeight="500"
                         variant="body2"
                       >
-                        Color:
+                        Colour:
                       </Typography>
                       <Typography
                         component="span"
@@ -89,6 +91,24 @@ const Pets = () => {
                         {pet.color}
                       </Typography>
                     </Box>
+
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Typography
+                        component="span"
+                        fontWeight="500"
+                        variant="body2"
+                      >
+                        Location:
+                      </Typography>
+                      <Typography
+                        component="span"
+                        fontWeight="400"
+                        variant="body2"
+                      >
+                        {pet.petLocation}
+                      </Typography>
+                    </Box>
+
                     <Box display="flex" alignItems="center" gap={1}>
                       <Typography
                         component="span"
@@ -127,6 +147,9 @@ const Pets = () => {
                     </Box>
                   </CardContent>
                 </CardActionArea>
+                <CardActions>
+                  <PetRemoveBtn id={pet._id} onRemoved={onPetRemoved} />
+                </CardActions>
               </Card>
             </Grid>
           ))}
