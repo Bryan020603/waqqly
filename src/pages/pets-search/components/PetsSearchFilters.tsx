@@ -29,10 +29,10 @@ export const PetsSearchFilters = () => {
         <TextField
           onChange={handleOnChange}
           fullWidth
-          value={searchParams.get('color') || ''}
-          name="color"
-          placeholder="Search by pet color"
-          label="Color"
+          value={searchParams.get('colour') || ''}
+          name="colour"
+          placeholder="Search by pet colour"
+          label="Colour"
         />
       </Grid>
       <Grid item xs={12} sm={3}>
