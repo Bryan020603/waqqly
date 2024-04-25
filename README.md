@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+# Waqqly
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Need to write project overview here.
 
-Currently, two official plugins are available:
+## Project local Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To setup and run the project locally, you need to have following dependencies installed on you system.
 
-## Expanding the ESLint configuration
+1- aws cli
+2- amplify cli
+3- nodejs 18
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Step 1: Clone the project
 
-- Configure the top-level `parserOptions` property like this:
+First, you need to clone repository by using git tool.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+`git clone https://github.com/Bryan020603/waqqly.git`
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Step 2: Install project dependencies
+
+Run the npm install command to install dependencies
+
+`npm install`
+
+### Step 3: Configure AWS profile
+
+Create a new IAM user on aws account with all the required permissions attached to that user. To interact with AWS from local development environment, you need to generate cli credentials for that user. Use the given command to create named profile locally and it will asks couple of questions.
+
+`aws configure --profile [profile-name]`
+
+### Step 4: Initialize Amplify project
+
+`amplify init`
+
+you need to choose existing environment while initializing amplify project.
+
+### Step 5: Run the application
+
+`npm run dev`
